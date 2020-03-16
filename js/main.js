@@ -95,11 +95,12 @@ $(function () {
             $('.appearing-list').css('animation-delay', '0s');
             $('.appearing-list').css('animation-duration', '0s');
             $('.appearing-list').css('opacity', '1');
-            $('.menu-filler').removeClass('hidden');
+            $('.menu__filler').removeClass('hidden');
             if( $('.burger').hasClass('active'))
                 $('.menu').transition({ x: 0}, 400);
         }
         else {
+            $('.menu__filler').addClass('hidden');
             $('.appearing-list').css('opacity', '0');
             $('.appearing-list').css('animation-delay', '.2s');
             $('.appearing-list').css('animation-duration', '.4s');
@@ -118,21 +119,18 @@ $(function () {
 
 
     const targetElement = document.querySelector('#body');
-    $('.burger, .appearing-list__link').click(function () {
-        if (Math.sign($('body').first().outerWidth() - 768) <= 0)
-        $('.menu-filler').removeClass('hidden');
+    
+    $('.burger, .appearing-list__link').click(function () { 
         if (T > 0) return;
         if ($('.menu').offset().left < 0) {
             $('.menu').transition({ x: '0' }, 400);
             $('.burger').addClass('active');
-
             bodyScrollLock.disableBodyScroll(targetElement);
         }
         else {
             
             $('.menu').transition({ x: '-300px' }, 400);
             $('.burger').removeClass('active');
-           
             bodyScrollLock.enableBodyScroll(targetElement);
         }
     });
