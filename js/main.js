@@ -13,17 +13,21 @@ function TimeFormat(time) {
 
 $(function () {
     //Перерасчёт vh, адаптирует высоту в мобильных браузерах при появлении\исчезновении адресной строки
-    let vh = window.innerHeight * 0.01, StopVhChanging = false;
+    var vh = window.innerHeight * 0.01, StopVhChanging = false, StoppedValue = vh;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-    window.addEventListener('resize', () => {
-        if (StopVhChanging) return;
+    var vhHandler = function() {
+        // получаем текущее значение высоты
+        if (StopVhChanging) return document.documentElement.style.setProperty('--vh', `${StoppedValue}px`);
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
-    //Не реагируем на всплытие клавиатуры на мобильниках
-    $('input').focus(()=>StopVhChanging = true);
-    $('input').focusout(()=>StopVhChanging = false);
+    };
+    setInterval(()=> StopVhChanging? 0 : StoppedValue = vh, 300);
+
+
+    $(window).bind('resize', vhHandler);
+        //Не реагируем на всплытие клавиатуры на мобильниках
+        $('input').focus(()=> StopVhChanging = true);
+        $('input').focusout(()=>StopVhChanging = false);
 
     // < Работа с видео >
     var vid = document.getElementById("video"), vidanimation = false, vidplay = false, vidposition = $("#video").offset().top, vidheight = $('#video').outerHeight(), newposition = 0, newheight = 0, lasttime = 0;
@@ -110,6 +114,7 @@ $(function () {
     }
     menufeatures();
     window.addEventListener("resize", function () {
+        _triggervalue = $(".spec").offset().top, _endtrigger = $('.info').offset.top
         let a = Math.sign($('body').first().outerWidth() - 768);
         if (a != T && a != 0) {
             T = a;
@@ -134,10 +139,10 @@ $(function () {
     });
 
     //Автоматический скролл при нажатии на кнопку Get Started
-    const _triggervalue = $(".spec").offset().top, _endtrigger = $('.info').offset.top;
+    var _triggervalue = $(".spec").offset().top, _endtrigger = $('.info').offset.top;
     $('.mainTitle__button').click(function () {
         $([document.documentElement, document.body]).animate({
-            scrollTop: _triggervalue
+            scrollTop: $(".spec").offset().top
         }, 800);
     });
 
