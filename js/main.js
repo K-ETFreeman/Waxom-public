@@ -154,23 +154,23 @@ $(function () {
 
         if (pageYOffset <= _triggervalue || pageYOffset > _endtrigger) {
             if (!menu__trigger) return;
-            $('header').removeClass('header_ready');
-            $('header').removeClass('header_blured');
+            $('.header').removeClass('header_ready');
+            $('.header').removeClass('header_blured');
             $('.menu').removeClass('menu_blured');
             return menu__trigger = 0;
         }
         else 
-            if (!$('header').hasClass('header_ready')) $('header').addClass('header_ready');
+            if (!$('.header').hasClass('header_ready')) $('.header').addClass('header_ready');
 
         if (pageYOffset >= prevValue)
             if (!menu__trigger) return prevValue = pageYOffset;
             else {
-                $('header').removeClass('header_blured');
+                $('.header').removeClass('header_blured');
                 $('.menu').removeClass('menu_blured');
                 return (menu__trigger = 0) + (prevValue = pageYOffset);
             }
-        $('header').addClass('header_ready');
-        $('header').addClass('header_blured');
+        $('.header').addClass('header_ready');
+        $('.header').addClass('header_blured');
         if (T < 0)
             $('.menu').addClass('menu_blured');
 
