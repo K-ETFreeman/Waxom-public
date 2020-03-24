@@ -35,6 +35,13 @@ $(function () {
         $('.video__duration').text(TimeFormat(parseInt(vid.duration)));
         vid.volume = 0.2;
     };
+
+    var fullsceen = false;
+    $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e)
+    {
+        fullsceen = !fullsceen;
+    });
+    
     function CloseVid() {
         vidanimation = true;
         vidplay = false;
@@ -149,7 +156,7 @@ $(function () {
     //Обработка всплытия меню, проверка видимости видео при его воспроизведении
     var menu__trigger = 0, prevValue = 0;
     ScrollHandler = function () {
-        if (vidplay && (pageYOffset + 100 * vh < newposition + newheight || pageYOffset > newposition))
+        if (!fullsceen && vidplay && (pageYOffset + 100 * vh < newposition + newheight || pageYOffset > newposition)) 
             CloseVid();
 
         if (pageYOffset <= _triggervalue || pageYOffset > _endtrigger) {
