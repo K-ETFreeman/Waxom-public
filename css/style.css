@@ -1036,6 +1036,7 @@ img {
 }
 
 .logos {
+  height: 370px;
   position: relative;
 }
 
@@ -1444,6 +1445,10 @@ img {
   .posts__arrows {
     display: none;
   }
+
+  .logos {
+    height: 340px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1538,8 +1543,12 @@ img {
 }
 
 @media (max-width: 450px) {
+  .ideas {
+    padding-bottom: var(--section-padding);
+  }
+
   .ideas__subtitle {
-    margin-bottom: var(--section-padding);
+    margin-bottom: 0;
   }
 
   .ideas__pictures {
