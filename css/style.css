@@ -676,6 +676,11 @@ img {
   height: 100%;
 }
 
+main {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
 .presentation {
   position: relative;
 }
